@@ -12,7 +12,7 @@ interface IBreadcrumb {
   selector: 'breadcrumb',
   template: `
     <ol class="breadcrumb">
-      <li><a routerLink="" class="breadcrumb">Home</a></li>
+      <li><a routerLink="" class="breadcrumb"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
       <li *ngFor="let breadcrumb of breadcrumbs">
         <a [routerLink]="[breadcrumb.url, breadcrumb.params]">{{breadcrumb.label}}</a>
       </li>
@@ -33,45 +33,45 @@ export class BreadcrumbComponent implements OnInit {
   ngOnInit() {
     const ROUTE_DATA_BREADCRUMB: string = 'breadcrumb';
 
-    //subscribe to the NavigationEnd event
+    // subscribe to the NavigationEnd event
     this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
 
-      //set breadcrumbs
+      // set breadcrumbs
       let root: ActivatedRoute = this.activatedRoute.root;
       this.breadcrumbs = this.getBreadcrumbs(root);
     });
   }
 
-  private getBreadcrumbs(route: ActivatedRoute, url: string='', breadcrumbs: IBreadcrumb[]=[]): IBreadcrumb[] {
+  private getBreadcrumbs(route: ActivatedRoute, url: string= '', breadcrumbs: IBreadcrumb[]= []): IBreadcrumb[] {
     const ROUTE_DATA_BREADCRUMB: string = 'breadcrumb';
 
-    //get the child routes
+    // get the child routes
     let children: ActivatedRoute[] = route.children;
 
-    //return if there are no more children
+    // return if there are no more children
     if (children.length === 0) {
-      return breadcrumbs;
+     return breadcrumbs;
     }
 
-    //iterate over each children
+    // iterate over each children
     for (let child of children) {
-      //verify primary route
+      // verify primary route
       if (child.outlet !== PRIMARY_OUTLET) {
         continue;
       }
 
-      //verify the custom data property "breadcrumb" is specified on the route
+      // verify the custom data property "breadcrumb" is specified on the route
       if (!child.snapshot.data.hasOwnProperty(ROUTE_DATA_BREADCRUMB)) {
         return this.getBreadcrumbs(child, url, breadcrumbs);
       }
 
-      //get the route's URL segment
+      // get the route's URL segment
       let routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
 
-      //append route URL to URL
+      // append route URL to URL
       url += `/${routeURL}`;
 
-      //add breadcrumb
+      // add breadcrumb
       let breadcrumb: IBreadcrumb = {
         label: child.snapshot.data[ROUTE_DATA_BREADCRUMB],
         params: child.snapshot.params,
@@ -79,11 +79,11 @@ export class BreadcrumbComponent implements OnInit {
       };
       breadcrumbs.push(breadcrumb);
 
-      //recursive
+      // recursive
       return this.getBreadcrumbs(child, url, breadcrumbs);
     }
 
-    //we should never get here, but just in case
+    // we should never get here, but just in case
     return breadcrumbs;
   }
 

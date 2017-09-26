@@ -7,6 +7,8 @@ import { RootComponent } from '../root/root.component';
 import { IndexComponent } from '../index/index.component';
 import { SigninComponent } from '../signin/signin.component';
 import { SignupComponent } from '../signup/signup.component';
+import { SignedinComponent } from '../signedin/signedin.component';
+import { SignedininComponent } from '../signedinin/signedinin.component';
 import { routing } from './app.routing.module';
 
 @NgModule({
@@ -16,7 +18,9 @@ import { routing } from './app.routing.module';
     RootComponent,
     IndexComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    SignedinComponent,
+    SignedininComponent
 
   ],
   imports: [

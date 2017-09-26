@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   template: `
-    <div routerLinkActive="hidden">
-    <h3>Sign In</h3>
+    <h3>Signed InIn</h3>
     <form>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
@@ -13,15 +12,11 @@ import { Component, OnInit } from '@angular/core';
         <label for="exampleInputPassword1">Password</label>
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
-      <!--<button type="submit" class="btn btn-default">Submit</button>-->
-      <a routerLink="signedin" class="btn btn-block btn-primary">Signed In</a>
+      <button type="submit" class="btn btn-default">Submit</button>
     </form>
-    </div>
-    <router-outlet></router-outlet>
-    
   `
 })
-export class SigninComponent implements OnInit {
+export class SignedininComponent implements OnInit {
 
   constructor() { }
 
